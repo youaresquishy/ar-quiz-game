@@ -1,0 +1,530 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --visa-blue:#1434CB;
+    --visa-dark:#071B5F;
+    --visa-deep:#031347;
+    --visa-yellow:#F7B600;
+    --text:#111827;
+    --muted:#6B7280;
+    --line:#E5E7EB;
+    --green:#22C55E;
+    --red:#EF4444;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:'Open Sans',sans-serif;
+    background:linear-gradient(
+        180deg,
+        var(--visa-deep) 0%,
+        var(--visa-dark) 45%,
+        var(--visa-blue) 100%);
+}
+
+#app{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:650px;
+    background:white;
+    border-radius:28px;
+    padding:34px;
+    box-shadow:0 25px 60px rgba(0,0,0,.28);
+    text-align:center;
+}
+
+.visaLogo{
+    color:var(--visa-blue);
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:-2px;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:38px;
+    color:var(--text);
+    margin-bottom:8px;
+}
+
+h2{
+    font-size:24px;
+    color:var(--text);
+    margin-bottom:18px;
+}
+
+.intro{
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.5;
+    margin-bottom:30px;
+}
+
+input{
+    width:100%;
+    padding:18px;
+    border-radius:18px;
+    border:1px solid var(--line);
+    font-size:18px;
+    outline:none;
+    margin-top:10px;
+}
+
+input:focus{
+    border-color:var(--visa-blue);
+    box-shadow:0 0 0 4px rgba(20,52,203,.12);
+}
+
+.error{
+    height:22px;
+    margin-top:10px;
+    color:var(--red);
+    font-weight:700;
+}
+
+.primaryButton{
+    margin-top:28px;
+    background:var(--visa-blue);
+    color:white;
+    border:none;
+    border-radius:999px;
+    padding:16px 34px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.primaryButton:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(20,52,203,.35);
+}
+
+.primaryButton:active{
+    transform:scale(.98);
+}
+
+#progressText{
+    font-size:14px;
+    font-weight:700;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    margin-bottom:10px;
+}
+
+.progressBar{
+    width:100%;
+    height:10px;
+    border-radius:999px;
+    background:#EEF2FF;
+    overflow:hidden;
+    margin-bottom:30px;
+}
+
+#progressFill{
+    width:0%;
+    height:100%;
+    background:var(--visa-blue);
+    transition:.35s;
+}
+
+#questionTitle{
+    text-align:left;
+    line-height:1.4;
+    margin-bottom:24px;
+}
+#answers{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-bottom:24px;
+}
+
+.answerButton{
+    width:100%;
+    background:#F8FAFC;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:18px;
+    text-align:left;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.answerButton:hover{
+    background:#EEF2FF;
+    border-color:var(--visa-blue);
+}
+
+.answerButton.correct{
+    background:#EAF8F0;
+    border-color:var(--green);
+    color:#166534;
+}
+
+.answerButton.wrong{
+    background:#FDECEC;
+    border-color:var(--red);
+    color:#991B1B;
+}
+
+.answerButton.dim{
+    opacity:.45;
+}
+
+#explanation{
+    display:none;
+    margin-top:24px;
+    padding:18px;
+    border-radius:18px;
+    background:#F8FAFC;
+    text-align:left;
+    color:#374151;
+    line-height:1.6;
+}
+
+#launchPage,
+#cameraPage{
+    text-align:center;
+}
+
+.cubeEmoji{
+    font-size:64px;
+    margin:20px 0;
+}
+
+/* ===========================
+   FULL SCREEN AR
+=========================== */
+
+#arPage{
+    position:fixed;
+    inset:0;
+    display:none;
+    background:black;
+    overflow:hidden;
+}
+
+a-scene{
+    position:absolute !important;
+    inset:0;
+    width:100vw !important;
+    height:100vh !important;
+}
+
+.a-canvas,
+canvas{
+    position:absolute !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+}
+
+.topOverlay{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    z-index:999;
+    padding:22px;
+    background:linear-gradient(
+        rgba(3,19,71,.95),
+        rgba(3,19,71,.75),
+        transparent);
+}
+
+.timer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:white;
+    font-size:18px;
+    font-weight:700;
+}
+
+#liveTimer{
+    font-size:30px;
+    font-weight:800;
+}
+
+.scanInstruction{
+    margin-top:18px;
+    text-align:center;
+    color:white;
+    font-size:18px;
+    font-weight:700;
+}
+/* ===========================
+   FOUND VEE PANEL
+=========================== */
+
+#foundPanel{
+    position:absolute;
+    left:20px;
+    right:20px;
+    bottom:30px;
+    z-index:999;
+
+    display:none;
+
+    background:white;
+    border-radius:26px;
+    padding:24px;
+
+    text-align:center;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.28);
+}
+
+#foundPanel h2{
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+#foundPanel h3{
+    color:var(--visa-blue);
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+#collectButton{
+    width:100%;
+}
+
+/* ===========================
+   COMPLETION PAGE
+=========================== */
+
+#completePage{
+    position:fixed;
+    inset:0;
+
+    display:none;
+
+    background:
+    linear-gradient(
+        180deg,
+        var(--visa-deep),
+        var(--visa-dark),
+        var(--visa-blue));
+
+    z-index:9999;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+}
+
+.completeCard{
+
+    width:100%;
+    max-width:480px;
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:36px 28px;
+
+    text-align:center;
+
+    box-shadow:
+    0 24px 70px rgba(0,0,0,.32);
+
+}
+
+.tick{
+
+    width:82px;
+    height:82px;
+
+    border-radius:50%;
+
+    background:#EAF8F0;
+
+    color:var(--green);
+
+    font-size:42px;
+    font-weight:800;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin:auto;
+    margin-bottom:22px;
+
+}
+
+.completeCard h1{
+
+    color:var(--visa-blue);
+
+    margin-bottom:10px;
+
+}
+
+.completeCard p{
+
+    color:#4B5563;
+
+    line-height:1.6;
+
+}
+
+.timeLabel{
+
+    margin-top:28px;
+
+    color:#6B7280;
+
+    font-size:13px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.12em;
+
+    font-weight:700;
+
+}
+
+.finalTime{
+
+    color:var(--visa-blue);
+
+    font-size:64px;
+
+    font-weight:800;
+
+    margin-top:8px;
+    margin-bottom:20px;
+
+    letter-spacing:-2px;
+
+}
+
+.winnerNote{
+
+    margin-top:24px;
+
+    background:#EEF4FF;
+
+    color:var(--visa-blue) !important;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    font-weight:700;
+
+}
+
+/* ===========================
+   VEE
+=========================== */
+
+#vee{
+
+    cursor:pointer;
+
+    animation:
+    fadeIn .35s;
+
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:scale(.7);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.card{
+
+padding:24px;
+
+border-radius:24px;
+
+}
+
+h1{
+
+font-size:32px;
+
+}
+
+h2{
+
+font-size:22px;
+
+}
+
+.primaryButton{
+
+width:100%;
+
+}
+
+.completeCard{
+
+padding:28px 22px;
+
+}
+
+.finalTime{
+
+font-size:52px;
+
+}
+
+.scanInstruction{
+
+font-size:17px;
+
+}
+
+#foundPanel{
+
+bottom:18px;
+
+left:12px;
+
+right:12px;
+
+padding:20px;
+
+}
+
+}
