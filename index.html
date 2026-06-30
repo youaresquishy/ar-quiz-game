@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>VEE Passport Challenge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+</head>
+
+<body>
+  <main id="app">
+    <section id="homeScreen" class="screen active">
+      <div class="card">
+        <div class="brand-pill">Visa Fireside Chat</div>
+        <h1>VEE Passport Challenge</h1>
+        <p class="subtitle">
+          Collect all 3 stamps to complete your VEE Passport and stand a chance to win a prize.
+        </p>
+
+        <label for="participantName">Your name</label>
+        <input id="participantName" type="text" placeholder="Your name" autocomplete="name" />
+
+        <button id="startBtn" class="primary-btn" type="button">Start</button>
+        <p id="nameError" class="error-text" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="passportIntroScreen" class="screen">
+      <div class="card">
+        <div class="brand-pill">Passport Issued</div>
+        <h1>🛂 VEE Passport</h1>
+        <p class="subtitle">Complete each activity to collect your stamps.</p>
+
+        <div id="passportIntroCard" class="passport-card"></div>
+
+        <button id="beginQuizBtn" class="primary-btn" type="button">Begin Quiz</button>
+      </div>
+    </section>
+
+    <section id="quizScreen" class="screen">
+      <div class="card quiz-card">
+        <div class="top-row">
+          <span id="questionCounter">Question 1 of 3</span>
+          <span id="participantLabel"></span>
+        </div>
+
+        <div id="quizStampDots" class="stamp-dots"></div>
+
+        <h2 id="questionText" class="question-text"></h2>
+        <div id="answersContainer" class="answers"></div>
+
+        <div id="feedbackBox" class="feedback hidden" aria-live="polite">
+          <div id="feedbackIcon" class="feedback-icon"></div>
+          <div class="feedback-copy">
+            <strong id="feedbackTitle"></strong>
+            <p id="feedbackExplanation"></p>
+          </div>
+        </div>
+
+        <button id="nextBtn" class="primary-btn hidden" type="button">Next</button>
+      </div>
+    </section>
+
+    <section id="stampScreen" class="screen">
+      <div class="card stamp-earned-card">
+        <div id="bigStamp" class="big-stamp">
+          <span>✓</span>
+        </div>
+        <h1 id="stampTitle">Stamp Earned!</h1>
+        <p id="stampMessage" class="subtitle"></p>
+        <button id="stampContinueBtn" class="primary-btn" type="button">Continue</button>
+      </div>
+    </section>
+
+    <section id="passportProgressScreen" class="screen">
+      <div class="card">
+        <div class="brand-pill">VEE Passport</div>
+        <h1>Your Progress</h1>
+        <p id="passportProgressMessage" class="subtitle"></p>
+
+        <div id="passportProgressCard" class="passport-card"></div>
+
+        <button id="passportContinueBtn" class="primary-btn" type="button">Continue</button>
+      </div>
+    </section>
+
+    <section id="socialScreen" class="screen">
+      <div class="card">
+        <div class="brand-pill">Social Stamp</div>
+        <h1>Follow Visa</h1>
+        <p class="subtitle">
+          Follow us on social media to collect your next VEE Passport stamp.
+        </p>
+
+        <a
+          id="socialLink"
+          class="social-link"
+          href="https://www.linkedin.com/company/visa/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Visa Social Page
+        </a>
+
+        <button id="followedBtn" class="primary-btn" type="button">I've Followed</button>
+        <p class="small-note">This is based on honour-system verification.</p>
+      </div>
+    </section>
+
+    <section id="cameraIntroScreen" class="screen">
+      <div class="card">
+        <div class="brand-pill">VEE Stamp</div>
+        <h1>Find VEE</h1>
+        <p class="subtitle">Point your camera at the WHERE'S VEE? cube marker.</p>
+
+        <div class="marker-preview">
+          <img src="WHERESVEE.png" alt="WHERE'S VEE marker" />
+        </div>
+
+        <p class="instruction-text">Point your camera at the Cube</p>
+
+        <button id="openCameraBtn" class="primary-btn" type="button">Open Camera</button>
+        <p id="cameraError" class="error-text" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="arScreen" class="screen ar-screen">
+      <div class="ar-overlay top">
+        <p id="arInstruction">Point your camera at the Cube</p>
+      </div>
+
+      <div id="collectPanel" class="ar-overlay bottom hidden">
+        <h2>🎉 You found VEE!</h2>
+        <button id="collectBtn" class="primary-btn" type="button">Collect VEE</button>
+      </div>
+
+      <div id="arMount"></div>
+    </section>
+
+    <section id="completeScreen" class="screen">
+      <div class="card completion-card">
+        <div class="brand-pill">VEE Passport</div>
+        <h1 id="completionHeadline">VEE Passport Completed!</h1>
+
+        <div id="finalPassportCard" class="passport-card"></div>
+
+        <div class="result-box">
+          <p class="result-label">Participant name</p>
+          <p id="finalName" class="result-value"></p>
+        </div>
+
+        <div class="result-box">
+          <p class="result-label">Completion time</p>
+          <p id="finalTime" class="result-value"></p>
+        </div>
+
+        <p id="completionMessage" class="facilitator-text"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,644 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #06115e;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Open Sans", Arial, sans-serif;
+  background: linear-gradient(160deg, #06115e 0%, #1434CB 55%, #06115e 100%);
+  color: #101828;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  min-height: 100dvh;
+}
+
+.screen {
+  display: none;
+  min-height: 100dvh;
+  width: 100%;
+  padding: max(18px, env(safe-area-inset-top)) 14px max(18px, env(safe-area-inset-bottom));
+  align-items: center;
+  justify-content: center;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.card {
+  width: 100%;
+  max-width: 540px;
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 24px 18px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+}
+
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #eaf0ff;
+  color: #1434CB;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(30px, 8vw, 42px);
+  line-height: 1.05;
+  color: #1434CB;
+  letter-spacing: -0.8px;
+}
+
+h2 {
+  margin: 20px 0 16px;
+  font-size: clamp(21px, 5.5vw, 26px);
+  line-height: 1.2;
+  color: #101828;
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  font-size: 16px;
+  line-height: 1.45;
+  color: #475467;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #344054;
+}
+
+input {
+  width: 100%;
+  border: 2px solid #d0d5dd;
+  border-radius: 16px;
+  padding: 15px 16px;
+  font-size: 17px;
+  outline: none;
+  margin-bottom: 18px;
+  background: #ffffff;
+  color: #101828;
+}
+
+input:focus {
+  border-color: #1434CB;
+  box-shadow: 0 0 0 4px rgba(20, 52, 203, 0.12);
+}
+
+.primary-btn {
+  width: 100%;
+  border: 0;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #1434CB 0%, #06115e 100%);
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 800;
+  padding: 16px 18px;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(20, 52, 203, 0.22);
+  text-align: center;
+}
+
+.primary-btn:active {
+  transform: scale(0.98);
+}
+
+.primary-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error-text {
+  min-height: 20px;
+  margin: 12px 0 0;
+  color: #d92d20;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.small-note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: #667085;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.passport-card {
+  width: 100%;
+  background:
+    radial-gradient(circle at 18px 18px, rgba(20, 52, 203, 0.12) 0 2px, transparent 3px),
+    linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+  border: 2px solid #dbe4ff;
+  border-radius: 24px;
+  padding: 18px;
+  margin: 0 0 22px;
+}
+
+.passport-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #1434CB;
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.stamp-count {
+  font-size: 13px;
+  color: #475467;
+  background: #eef3ff;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.stamp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 11px;
+}
+
+.passport-stamp {
+  min-height: 116px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 2px dashed #c7d7ff;
+  padding: 12px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.passport-stamp.earned {
+  border-style: solid;
+  border-color: #1434CB;
+  background: #eef3ff;
+}
+
+.stamp-circle {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 10px;
+  border-radius: 999px;
+  border: 2px dashed #98a2b3;
+  color: #98a2b3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.passport-stamp.earned .stamp-circle {
+  border: 0;
+  background: #1434CB;
+  color: #ffffff;
+  animation: stampPop 360ms ease both;
+}
+
+.stamp-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: #344054;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1.25;
+}
+
+.passport-stamp.earned .stamp-label {
+  color: #1434CB;
+}
+
+.stamp-dots {
+  margin: 14px 0 18px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.stamp-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 2px dashed #98a2b3;
+  background: #ffffff;
+}
+
+.stamp-dot.earned {
+  border: 0;
+  background: #1434CB;
+  position: relative;
+}
+
+.stamp-dot.earned::after {
+  content: "✓";
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quiz-card {
+  align-self: flex-start;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1434CB;
+  margin-bottom: 8px;
+}
+
+#participantLabel {
+  max-width: 45%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.answers {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.answer-btn {
+  width: 100%;
+  border: 2px solid #d0d5dd;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #101828;
+  padding: 14px;
+  text-align: left;
+  font-size: 15.5px;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1.35;
+}
+
+.answer-btn:active {
+  transform: scale(0.99);
+}
+
+.answer-btn.correct {
+  border-color: #12b76a;
+  background: #ecfdf3;
+}
+
+.answer-btn.wrong {
+  border-color: #f04438;
+  background: #fef3f2;
+}
+
+.answer-btn.disabled {
+  pointer-events: none;
+}
+
+.feedback {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border-radius: 20px;
+  padding: 15px;
+  margin: 16px 0;
+  background: #f2f4f7;
+}
+
+.feedback.correct {
+  background: #ecfdf3;
+}
+
+.feedback.wrong {
+  background: #fef3f2;
+}
+
+.feedback-icon {
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 800;
+  min-width: 28px;
+  text-align: center;
+}
+
+.feedback-copy strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+.feedback-copy p {
+  margin: 0;
+  color: #475467;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+.stamp-earned-card {
+  text-align: center;
+}
+
+.big-stamp {
+  width: 128px;
+  height: 128px;
+  border-radius: 999px;
+  background: #1434CB;
+  color: #ffffff;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 18px 34px rgba(20, 52, 203, 0.3);
+  animation: bigStamp 420ms cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
+}
+
+.big-stamp span {
+  font-size: 70px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.social-link {
+  display: block;
+  text-decoration: none;
+  width: 100%;
+  border-radius: 18px;
+  background: #eef3ff;
+  color: #1434CB;
+  font-size: 17px;
+  font-weight: 800;
+  padding: 16px 18px;
+  text-align: center;
+  margin-bottom: 14px;
+  border: 2px solid #dbe4ff;
+}
+
+.marker-preview {
+  width: 100%;
+  background: #f2f4f7;
+  border-radius: 20px;
+  padding: 12px;
+  margin: 0 0 18px;
+}
+
+.marker-preview img {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+}
+
+.instruction-text {
+  color: #1434CB;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.35;
+  margin: 0 0 22px;
+}
+
+.ar-screen {
+  position: fixed;
+  inset: 0;
+  padding: 0;
+  background: #000000;
+  overflow: hidden;
+}
+
+.ar-screen.active {
+  display: block;
+}
+
+#arMount,
+#arScene {
+  position: fixed;
+  inset: 0;
+  width: 100vw !important;
+  height: 100dvh !important;
+  overflow: hidden;
+  background: #000000;
+}
+
+#arScene video,
+#arScene canvas,
+.a-canvas,
+video {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  object-fit: cover !important;
+}
+
+.ar-overlay {
+  position: fixed;
+  z-index: 9999;
+  left: 14px;
+  right: 14px;
+  pointer-events: none;
+}
+
+.ar-overlay.top {
+  top: max(14px, env(safe-area-inset-top));
+}
+
+.ar-overlay.bottom {
+  bottom: max(18px, env(safe-area-inset-bottom));
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 24px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.ar-overlay.top p {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.94);
+  color: #1434CB;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.ar-overlay.bottom h2 {
+  margin: 0 0 14px;
+  color: #1434CB;
+}
+
+.completion-card {
+  text-align: center;
+}
+
+.result-box {
+  text-align: left;
+  background: #f2f4f7;
+  border-radius: 20px;
+  padding: 16px;
+  margin-top: 14px;
+}
+
+.result-label {
+  margin: 0 0 5px;
+  font-size: 13px;
+  color: #667085;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.result-value {
+  margin: 0;
+  font-size: 22px;
+  color: #101828;
+  font-weight: 800;
+  word-break: break-word;
+}
+
+.facilitator-text {
+  margin: 22px 0 0;
+  font-size: 17px;
+  line-height: 1.45;
+  color: #1434CB;
+  font-weight: 800;
+}
+
+@keyframes stampPop {
+  0% {
+    transform: scale(0.76) rotate(-4deg);
+    opacity: 0.2;
+  }
+
+  70% {
+    transform: scale(1.08) rotate(2deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes bigStamp {
+  0% {
+    transform: scale(0.72) rotate(-8deg);
+    opacity: 0;
+  }
+
+  65% {
+    transform: scale(1.12) rotate(3deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 640px) {
+  .screen {
+    padding: 40px 24px;
+  }
+
+  .card {
+    padding: 34px 30px;
+    border-radius: 30px;
+  }
+
+  .quiz-card {
+    align-self: center;
+  }
+
+  .answer-btn {
+    font-size: 16px;
+    padding: 15px 16px;
+  }
+}
+
+@media (max-width: 370px) {
+  .screen {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 20px 15px;
+    border-radius: 22px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .answer-btn {
+    font-size: 14.5px;
+    padding: 13px;
+  }
+
+  .feedback-copy p {
+    font-size: 14px;
+  }
+
+  .passport-card {
+    padding: 14px;
+  }
+
+  .passport-stamp {
+    min-height: 106px;
+  }
+
+  .stamp-circle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .stamp-label {
+    font-size: 11px;
+  }
+}
