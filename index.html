@@ -5,206 +5,202 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Fireside Chat - Icebreaker</title>
 
-<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-
 <style>
+*{box-sizing:border-box}
+
 body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#1434CB;
-    color:white;
-    min-height:100vh;
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#1434CB;
+  color:white;
+  min-height:100vh;
 }
 
 .centerPage{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    padding:20px;
-    box-sizing:border-box;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:18px;
 }
 
 .container{
-    width:92%;
-    max-width:780px;
-    text-align:center;
-    background:rgba(255,255,255,0.08);
-    border-radius:24px;
-    padding:36px;
-    box-sizing:border-box;
-    box-shadow:0 12px 30px rgba(0,0,0,0.25);
+  width:100%;
+  max-width:680px;
+  text-align:center;
+  background:rgba(255,255,255,0.09);
+  border-radius:22px;
+  padding:28px 20px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.25);
 }
 
 h1{
-    color:#F7B600;
+  color:#F7B600;
+  font-size:clamp(28px,7vw,44px);
+  margin:0 0 18px;
 }
 
 h2{
-    color:white;
+  color:white;
+  font-size:clamp(22px,5vw,30px);
 }
 
 p{
-    line-height:1.5;
+  font-size:clamp(16px,4vw,19px);
+  line-height:1.45;
 }
 
 input{
-    width:80%;
-    max-width:360px;
-    padding:15px;
-    font-size:18px;
-    border-radius:10px;
-    border:none;
-    margin-top:20px;
+  width:100%;
+  max-width:360px;
+  padding:15px;
+  font-size:18px;
+  border-radius:12px;
+  border:none;
+  margin-top:15px;
 }
 
 .option{
-    width:100%;
-    margin:10px 0;
-    padding:15px;
-    font-size:18px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:white;
-    color:#1434CB;
-    transition:0.2s;
-    text-align:left;
-}
-
-.option:hover{
-    background:#f2f2f2;
+  width:100%;
+  margin:10px 0;
+  padding:15px;
+  font-size:clamp(16px,4vw,18px);
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:white;
+  color:#1434CB;
+  text-align:left;
 }
 
 .option.correct{
-    background:#27ae60;
-    color:white;
-    font-weight:bold;
+  background:#27ae60;
+  color:white;
+  font-weight:bold;
 }
 
 .option.wrong{
-    background:#c0392b;
-    color:white;
-    font-weight:bold;
+  background:#c0392b;
+  color:white;
+  font-weight:bold;
 }
 
 .option.dim{
-    opacity:0.55;
-}
-
-.highlight{
-    color:#F7B600;
-    font-weight:bold;
-}
-
-.good{
-    color:#2ECC71;
-    font-weight:bold;
+  opacity:.55;
 }
 
 .mainBtn{
-    margin-top:25px;
-    padding:15px 35px;
-    font-size:18px;
-    border:none;
-    border-radius:10px;
-    background:white;
-    color:#1434CB;
-    font-weight:bold;
-    cursor:pointer;
+  margin-top:22px;
+  padding:15px 28px;
+  font-size:18px;
+  border:none;
+  border-radius:12px;
+  background:white;
+  color:#1434CB;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.mainBtn:hover{
-    background:#f2f2f2;
+.highlight{
+  color:#F7B600;
+  font-weight:bold;
 }
 
-#feedback{
-    margin-top:25px;
-    line-height:1.6;
-    font-size:18px;
+.good{
+  color:#2ECC71;
+  font-weight:bold;
 }
 
 .progressText{
-    margin-bottom:10px;
-    color:white;
-    font-weight:bold;
+  margin-bottom:10px;
+  color:white;
+  font-weight:bold;
 }
 
 .progressOuter{
-    width:100%;
-    height:12px;
-    background:rgba(255,255,255,0.35);
-    border-radius:999px;
-    margin-bottom:30px;
-    overflow:hidden;
+  width:100%;
+  height:12px;
+  background:rgba(255,255,255,.35);
+  border-radius:999px;
+  margin-bottom:25px;
+  overflow:hidden;
 }
 
 .progressInner{
-    height:100%;
-    width:0%;
-    background:#F7B600;
-    border-radius:999px;
-    transition:0.3s;
+  height:100%;
+  width:0%;
+  background:#F7B600;
+  border-radius:999px;
+}
+
+#question{
+  font-size:clamp(20px,5vw,26px);
+  margin-bottom:22px;
+  line-height:1.35;
+}
+
+#feedback{
+  margin-top:22px;
+  font-size:clamp(16px,4vw,18px);
+  line-height:1.55;
 }
 
 #arScreen{
-    display:none;
-    width:100vw;
-    height:100vh;
-    overflow:hidden;
-    background:#000;
+  display:none;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+  background:#000;
+}
+
+#arContainer{
+  width:100vw;
+  height:100vh;
 }
 
 #arOverlay{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:999;
-    background:rgba(20,52,203,0.92);
-    padding:12px;
-    text-align:center;
-    color:white;
-    font-size:16px;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:999;
+  background:rgba(20,52,203,.92);
+  padding:12px;
+  text-align:center;
+  font-size:15px;
 }
 
 #foundBanner{
-    display:none;
-    position:fixed;
-    left:50%;
-    bottom:35px;
-    transform:translateX(-50%);
-    z-index:999;
-    background:white;
-    color:#1434CB;
-    font-weight:bold;
-    padding:14px 22px;
-    border-radius:999px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.3);
+  display:none;
+  position:fixed;
+  left:50%;
+  bottom:35px;
+  transform:translateX(-50%);
+  z-index:999;
+  background:white;
+  color:#1434CB;
+  font-weight:bold;
+  padding:14px 22px;
+  border-radius:999px;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
 }
 
 #completeOverlay{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:#1434CB;
-    color:white;
-    text-align:center;
-    padding:30px;
-    box-sizing:border-box;
-}
-
-#completeOverlay h1{
-    color:#F7B600;
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#1434CB;
+  color:white;
+  text-align:center;
+  padding:30px;
 }
 
 .timeBox{
-    font-size:38px;
-    color:#F7B600;
-    font-weight:bold;
-    margin:20px 0;
+  font-size:clamp(34px,10vw,52px);
+  color:#F7B600;
+  font-weight:bold;
+  margin:20px 0;
 }
 </style>
 </head>
@@ -215,79 +211,49 @@ input{
 <div class="container" id="container">
 
 <div id="welcomeScreen">
-    <h1>Fireside Chat - Icebreaker</h1>
-    <p>Welcome!</p>
-    <p>Please enter your name before we begin.</p>
-    <input type="text" id="nameInput" placeholder="Your name">
-    <br>
-    <button class="mainBtn" onclick="startQuiz()">Start</button>
+  <h1>Fireside Chat - Icebreaker</h1>
+  <p>Welcome!</p>
+  <p>Please enter your name before we begin.</p>
+  <input type="text" id="nameInput" placeholder="Your name">
+  <br>
+  <button class="mainBtn" onclick="startQuiz()">Start</button>
 </div>
 
 <div id="quizScreen" style="display:none;">
-    <h1>Fireside Chat - Icebreaker</h1>
+  <h1>Fireside Chat - Icebreaker</h1>
 
-    <div class="progressText" id="progressText"></div>
-    <div class="progressOuter">
-        <div class="progressInner" id="progressInner"></div>
-    </div>
+  <div class="progressText" id="progressText"></div>
+  <div class="progressOuter">
+    <div class="progressInner" id="progressInner"></div>
+  </div>
 
-    <div id="question" style="font-size:24px;margin-bottom:25px;line-height:1.4;"></div>
-    <div id="options"></div>
-    <div id="feedback"></div>
+  <div id="question"></div>
+  <div id="options"></div>
+  <div id="feedback"></div>
 
-    <button id="nextBtn" class="mainBtn" style="display:none;" onclick="nextQuestion()">Next Question</button>
+  <button id="nextBtn" class="mainBtn" style="display:none;" onclick="nextQuestion()">Next Question</button>
 </div>
 
 </div>
 </div>
 
 <div id="arScreen">
-    <div id="arOverlay">
-        <strong>Challenge started.</strong><br>
-        Find VEE and scan the AR token.<br>
-        Time: <span id="liveTimer">0.0s</span>
-    </div>
+  <div id="arOverlay">
+    <strong>Challenge started.</strong><br>
+    Find VEE and scan the AR token.<br>
+    Time: <span id="liveTimer">0.0s</span>
+  </div>
 
-    <div id="foundBanner">VEE found! Playing message...</div>
-
-    <a-scene
-        embedded
-        vr-mode-ui="enabled: false"
-        renderer="logarithmicDepthBuffer: true; antialias: true; alpha: true;"
-        arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono;">
-
-        <a-assets>
-            <video
-                id="myVideo"
-                src="video.mp4"
-                preload="auto"
-                loop
-                muted
-                playsinline
-                webkit-playsinline>
-            </video>
-        </a-assets>
-
-        <a-marker preset="hiro" id="arMarker">
-            <a-video
-                src="#myVideo"
-                width="1.4"
-                height="1.4"
-                position="0 0.7 0"
-                rotation="0 0 0">
-            </a-video>
-        </a-marker>
-
-        <a-entity camera></a-entity>
-    </a-scene>
+  <div id="foundBanner">VEE found! Playing message...</div>
+  <div id="arContainer"></div>
 </div>
 
 <div id="completeOverlay">
-    <h1>Challenge Complete!</h1>
-    <p>Great job, <span id="finalName"></span>. You found VEE.</p>
-    <p>Your completion time is:</p>
-    <div class="timeBox" id="finalTime"></div>
-    <p>Show this screen to the facilitator. Fastest 5 participants win a prize.</p>
+  <h1>Challenge Complete!</h1>
+  <p>Great job, <span id="finalName"></span>. You found VEE.</p>
+  <p>Your completion time is:</p>
+  <div class="timeBox" id="finalTime"></div>
+  <p>Show this screen to the facilitator. Fastest 5 participants win a prize.</p>
 </div>
 
 <script>
@@ -296,6 +262,7 @@ let currentQuestion=0;
 let challengeStartTime=null;
 let timerInterval=null;
 let completed=false;
+let arLoaded=false;
 
 const quiz=[
 {
@@ -334,144 +301,197 @@ explanation:"Loyalty is evolving from standalone rewards programs to always-on e
 ];
 
 function startQuiz(){
-    participantName=document.getElementById("nameInput").value.trim();
+  participantName=document.getElementById("nameInput").value.trim();
 
-    if(participantName===""){
-        alert("Please enter your name.");
-        return;
-    }
+  if(participantName===""){
+    alert("Please enter your name.");
+    return;
+  }
 
-    document.getElementById("welcomeScreen").style.display="none";
-    document.getElementById("quizScreen").style.display="block";
-
-    loadQuestion();
+  document.getElementById("welcomeScreen").style.display="none";
+  document.getElementById("quizScreen").style.display="block";
+  loadQuestion();
 }
 
 function loadQuestion(){
-    document.getElementById("feedback").innerHTML="";
-    document.getElementById("nextBtn").style.display="none";
+  document.getElementById("feedback").innerHTML="";
+  document.getElementById("nextBtn").style.display="none";
 
-    const q=quiz[currentQuestion];
+  const q=quiz[currentQuestion];
 
-    document.getElementById("progressText").innerHTML=
-        "Question "+(currentQuestion+1)+" of "+quiz.length;
+  document.getElementById("progressText").innerHTML=
+    "Question "+(currentQuestion+1)+" of "+quiz.length;
 
-    document.getElementById("progressInner").style.width=
-        ((currentQuestion+1)/quiz.length*100)+"%";
+  document.getElementById("progressInner").style.width=
+    ((currentQuestion+1)/quiz.length*100)+"%";
 
-    document.getElementById("question").innerHTML=q.question;
+  document.getElementById("question").innerHTML=q.question;
 
-    const optionsDiv=document.getElementById("options");
-    optionsDiv.innerHTML="";
+  const optionsDiv=document.getElementById("options");
+  optionsDiv.innerHTML="";
 
-    q.options.forEach(option=>{
-        const btn=document.createElement("button");
-        btn.className="option";
-        btn.innerHTML=option;
-
-        btn.onclick=function(){
-            revealAnswer(option);
-        };
-
-        optionsDiv.appendChild(btn);
-    });
+  q.options.forEach(option=>{
+    const btn=document.createElement("button");
+    btn.className="option";
+    btn.innerHTML=option;
+    btn.onclick=function(){revealAnswer(option);};
+    optionsDiv.appendChild(btn);
+  });
 }
 
 function revealAnswer(selectedOption){
-    const q=quiz[currentQuestion];
-    const buttons=document.querySelectorAll(".option");
+  const q=quiz[currentQuestion];
+  const buttons=document.querySelectorAll(".option");
 
-    buttons.forEach(btn=>{
-        const optionText=btn.innerHTML;
-        btn.disabled=true;
+  buttons.forEach(btn=>{
+    const optionText=btn.innerHTML;
+    btn.disabled=true;
 
-        if(optionText===q.answer){
-            btn.classList.add("correct");
-            btn.innerHTML="✓ "+optionText;
-        }
-        else if(optionText===selectedOption){
-            btn.classList.add("wrong");
-            btn.innerHTML="✕ "+optionText;
-        }
-        else{
-            btn.classList.add("dim");
-            btn.innerHTML="• "+optionText;
-        }
-    });
+    if(optionText===q.answer){
+      btn.classList.add("correct");
+      btn.innerHTML="✓ "+optionText;
+    }
+    else if(optionText===selectedOption){
+      btn.classList.add("wrong");
+      btn.innerHTML="✕ "+optionText;
+    }
+    else{
+      btn.classList.add("dim");
+      btn.innerHTML="• "+optionText;
+    }
+  });
 
-    document.getElementById("feedback").innerHTML=
-        "<p class='good'>"+
-        (selectedOption===q.answer ? "Great choice!" : "Interesting perspective!")+
-        "</p><p>"+q.explanation+"</p>";
+  document.getElementById("feedback").innerHTML=
+    "<p class='good'>"+
+    (selectedOption===q.answer ? "Great choice!" : "Interesting perspective!")+
+    "</p><p>"+q.explanation+"</p>";
 
-    document.getElementById("nextBtn").style.display="inline-block";
+  document.getElementById("nextBtn").style.display="inline-block";
 }
 
 function nextQuestion(){
-    currentQuestion++;
+  currentQuestion++;
 
-    if(currentQuestion<quiz.length){
-        loadQuestion();
-    }
-    else{
-        showLaunchScreen();
-    }
+  if(currentQuestion<quiz.length){
+    loadQuestion();
+  }else{
+    showLaunchScreen();
+  }
 }
 
 function showLaunchScreen(){
-    document.getElementById("container").innerHTML=
-    `
-    <h1>Thanks, ${participantName}!</h1>
-    <h2>You've completed the icebreaker.</h2>
-    <p><strong>Your challenge begins now.</strong></p>
-    <p>VEE is hiding somewhere in the room. Find VEE and scan the AR token.</p>
-    <p class="highlight">Fastest 5 participants win a prize.</p>
-    <button class="mainBtn" onclick="launchAR()">Start Challenge</button>
-    `;
+  document.getElementById("container").innerHTML=
+  `
+  <h1>Thanks, ${participantName}!</h1>
+  <h2>You've completed the icebreaker.</h2>
+  <p><strong>Your challenge begins now.</strong></p>
+  <p>VEE is hiding somewhere in the room. Find VEE and scan the AR token.</p>
+  <p class="highlight">Fastest 5 participants win a prize.</p>
+  <button class="mainBtn" onclick="launchAR()">Start Challenge</button>
+  `;
+}
+
+function loadARScripts(callback){
+  if(arLoaded){
+    callback();
+    return;
+  }
+
+  const aframe=document.createElement("script");
+  aframe.src="https://aframe.io/releases/1.6.0/aframe.min.js";
+
+  aframe.onload=function(){
+    const arjs=document.createElement("script");
+    arjs.src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js";
+
+    arjs.onload=function(){
+      arLoaded=true;
+      callback();
+    };
+
+    document.head.appendChild(arjs);
+  };
+
+  document.head.appendChild(aframe);
 }
 
 function launchAR(){
-    challengeStartTime=Date.now();
+  completed=false;
+  challengeStartTime=Date.now();
 
-    document.getElementById("mainApp").style.display="none";
-    document.getElementById("arScreen").style.display="block";
+  document.getElementById("mainApp").style.display="none";
+  document.getElementById("arScreen").style.display="block";
 
-    timerInterval=setInterval(function(){
-        const elapsed=(Date.now()-challengeStartTime)/1000;
-        document.getElementById("liveTimer").innerHTML=elapsed.toFixed(1)+"s";
-    },100);
+  timerInterval=setInterval(function(){
+    const elapsed=(Date.now()-challengeStartTime)/1000;
+    document.getElementById("liveTimer").innerHTML=elapsed.toFixed(1)+"s";
+  },100);
 
-    const video=document.getElementById("myVideo");
-    video.currentTime=0;
-    video.play().catch(function(){});
+  loadARScripts(createARScene);
 }
 
-document.addEventListener("DOMContentLoaded",function(){
+function createARScene(){
+  document.getElementById("arContainer").innerHTML=
+  `
+  <a-scene
+    embedded
+    vr-mode-ui="enabled: false"
+    renderer="logarithmicDepthBuffer: true; antialias: true; alpha: true;"
+    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono;">
+
+    <a-assets>
+      <video
+        id="myVideo"
+        src="video.mp4"
+        preload="auto"
+        loop
+        muted
+        playsinline
+        webkit-playsinline>
+      </video>
+    </a-assets>
+
+    <a-marker preset="hiro" id="arMarker">
+      <a-video
+        src="#myVideo"
+        width="1.4"
+        height="1.4"
+        position="0 0.7 0"
+        rotation="0 0 0">
+      </a-video>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+  `;
+
+  setTimeout(function(){
     const marker=document.getElementById("arMarker");
 
     marker.addEventListener("markerFound",function(){
-        if(completed || !challengeStartTime) return;
+      if(completed || !challengeStartTime) return;
 
-        completed=true;
+      completed=true;
 
-        const elapsed=(Date.now()-challengeStartTime)/1000;
-        clearInterval(timerInterval);
+      const elapsed=(Date.now()-challengeStartTime)/1000;
+      clearInterval(timerInterval);
 
-        document.getElementById("liveTimer").innerHTML=elapsed.toFixed(1)+"s";
-        document.getElementById("foundBanner").style.display="block";
+      document.getElementById("liveTimer").innerHTML=elapsed.toFixed(1)+"s";
+      document.getElementById("foundBanner").style.display="block";
 
-        const video=document.getElementById("myVideo");
-        video.currentTime=0;
-        video.play().catch(function(){});
+      const video=document.getElementById("myVideo");
+      video.currentTime=0;
+      video.play().catch(function(){});
 
-        document.getElementById("finalName").innerHTML=participantName;
-        document.getElementById("finalTime").innerHTML=elapsed.toFixed(1)+" seconds";
+      document.getElementById("finalName").innerHTML=participantName;
+      document.getElementById("finalTime").innerHTML=elapsed.toFixed(1)+" seconds";
 
-        setTimeout(function(){
-            document.getElementById("completeOverlay").style.display="block";
-        },2400);
+      setTimeout(function(){
+        document.getElementById("completeOverlay").style.display="block";
+      },2400);
     });
-});
+  },800);
+}
 </script>
 
 </body>
