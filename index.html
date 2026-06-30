@@ -8,7 +8,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="style.css" />
 
@@ -18,6 +21,8 @@
 
 <body>
   <main id="app">
+
+    <!-- HOME SCREEN -->
     <section id="homeScreen" class="screen active">
       <div class="card">
         <div class="brand-pill">Visa</div>
@@ -35,12 +40,13 @@
           autocomplete="name"
         />
 
-        <button id="startBtn" class="primary-btn">Start</button>
+        <button id="startBtn" class="primary-btn" type="button">Start</button>
 
         <p id="nameError" class="error-text"></p>
       </div>
     </section>
 
+    <!-- QUIZ SCREEN -->
     <section id="quizScreen" class="screen">
       <div class="card">
         <div class="top-row">
@@ -64,10 +70,11 @@
           </div>
         </div>
 
-        <button id="nextBtn" class="primary-btn hidden">Next</button>
+        <button id="nextBtn" class="primary-btn hidden" type="button">Next</button>
       </div>
     </section>
 
+    <!-- CAMERA PERMISSION SCREEN -->
     <section id="cameraIntroScreen" class="screen">
       <div class="card">
         <div class="brand-pill">AR Challenge</div>
@@ -80,10 +87,13 @@
 
         <p class="instruction-text">Point your camera at the Cube</p>
 
-        <button id="openCameraBtn" class="primary-btn">Open Camera</button>
+        <button id="openCameraBtn" class="primary-btn" type="button">
+          Open Camera
+        </button>
       </div>
     </section>
 
+    <!-- AR SCREEN -->
     <section id="arScreen" class="screen ar-screen">
       <div class="ar-overlay top">
         <p id="arInstruction">Point your camera at the Cube</p>
@@ -91,7 +101,9 @@
 
       <div id="collectPanel" class="ar-overlay bottom hidden">
         <h2>🎉 You found VEE!</h2>
-        <button id="collectBtn" class="primary-btn">Collect VEE</button>
+        <button id="collectBtn" class="primary-btn" type="button">
+          Collect VEE
+        </button>
       </div>
 
       <a-scene
@@ -102,7 +114,7 @@
         arjs="sourceType: webcam; debugUIEnabled: false;"
       >
         <a-assets>
-          <img id="veeTexture" src="vee.gif" />
+          <img id="veeTexture" src="vee.gif" alt="VEE">
         </a-assets>
 
         <a-marker id="hiroMarker" preset="hiro">
@@ -122,6 +134,7 @@
       </a-scene>
     </section>
 
+    <!-- COMPLETION SCREEN -->
     <section id="completeScreen" class="screen">
       <div class="card completion-card">
         <div class="big-emoji">🎉</div>
@@ -143,6 +156,7 @@
         </p>
       </div>
     </section>
+
   </main>
 
   <script src="app.js"></script>
