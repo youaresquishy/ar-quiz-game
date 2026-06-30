@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Fireside Chat Icebreaker</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.min.js"></script>
+</head>
+
+<body>
+  <main id="app">
+    <section id="homeScreen" class="screen active">
+      <div class="card">
+        <div class="brand-pill">Visa</div>
+        <h1>Fireside Chat</h1>
+        <h2 class="home-subtitle">Icebreaker</h2>
+        <p class="subtitle">Please enter your name before we begin.</p>
+
+        <label for="participantName">Your name</label>
+        <input id="participantName" type="text" placeholder="Your name" autocomplete="name" />
+
+        <button id="startBtn" class="primary-btn" type="button">Start</button>
+        <p id="nameError" class="error-text" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="quizScreen" class="screen">
+      <div class="card quiz-card">
+        <div class="top-row">
+          <span id="questionCounter">Question 1 of 3</span>
+          <span id="participantLabel"></span>
+        </div>
+
+        <div class="progress-track" aria-hidden="true">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+
+        <h2 id="questionText" class="question-text"></h2>
+        <div id="answersContainer" class="answers"></div>
+
+        <div id="feedbackBox" class="feedback hidden" aria-live="polite">
+          <div id="feedbackIcon" class="feedback-icon"></div>
+          <div class="feedback-copy">
+            <strong id="feedbackTitle"></strong>
+            <p id="feedbackExplanation"></p>
+          </div>
+        </div>
+
+        <button id="nextBtn" class="primary-btn hidden" type="button">Next</button>
+      </div>
+    </section>
+
+    <section id="cameraIntroScreen" class="screen">
+      <div class="card">
+        <div class="brand-pill">AR Challenge</div>
+        <h1>Find VEE</h1>
+        <p class="subtitle">Allow camera access, then scan the Hiro marker cube.</p>
+        <p class="instruction-text">Point your camera at the Cube</p>
+        <button id="openCameraBtn" class="primary-btn" type="button">Open Camera</button>
+        <p class="small-note">Camera permission will be requested after you tap this button.</p>
+      </div>
+    </section>
+
+    <section id="arScreen" class="screen ar-screen">
+      <div class="ar-overlay top">
+        <p id="arInstruction">Point your camera at the Cube</p>
+      </div>
+
+      <div id="collectPanel" class="ar-overlay bottom hidden">
+        <h2>🎉 You found VEE!</h2>
+        <button id="collectBtn" class="primary-btn" type="button">Collect VEE</button>
+      </div>
+
+      <div id="arMount"></div>
+    </section>
+
+    <section id="completeScreen" class="screen">
+      <div class="card completion-card">
+        <div class="big-emoji">🎉</div>
+        <h1>VEE Collected</h1>
+
+        <div class="result-box">
+          <p class="result-label">Participant name</p>
+          <p id="finalName" class="result-value"></p>
+        </div>
+
+        <div class="result-box">
+          <p class="result-label">Completion time</p>
+          <p id="finalTime" class="result-value"></p>
+        </div>
+
+        <p class="facilitator-text">Show this screen to the facilitator. Fastest 5 win a prize.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
